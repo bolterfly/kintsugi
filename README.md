@@ -37,7 +37,7 @@ Note, that this test does not require the existence of the hardware as this is a
 
 ### Experiments
 
-We provide evaluation scripts in the directory `evaluation_scripts' which are interactive and include descriptions of their working and how to correctly use them. If a script automatically produces outputs (i.e., the performance experiments) they will be stored in the folder `measurement_results` under their corresponding subdirectories. We clearly mark experiments that do *not* automatically produce outputs. Those experiments require access to the UART of the board through, e.g., `screen`, `minicom` or `puTTY` with a baudrate of 115200.
+We provide evaluation scripts in the directory `evaluation_scripts` which are interactive and include descriptions of their working and how to correctly use them. If a script automatically produces outputs (i.e., the performance experiments) they will be stored in the folder `measurement_results` under their corresponding subdirectories. We clearly mark experiments that do *not* automatically produce outputs. Those experiments require access to the UART of the board through, e.g., `screen`, `minicom` or `puTTY` with a baudrate of 115200.
 
 - **(E1) `micro-benchmarks.sh` [ ~ 6 computer-hours ]**: Execute the *Micro-Benchmarking* experiments of the *Manager* to prove (**C1**), measuring how each component inside of the *Manager* takes to execute.
     - **Automatic Output**: *Yes.*
