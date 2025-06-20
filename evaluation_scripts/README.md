@@ -1,5 +1,5 @@
 # Kintsugi Experimental Evaluation Scripts
----
+
 
 This directory contains all necessary scripts to reproduce the experiments from our paper.
 Experiments that measure performance: `micro-benchmarks.sh`, `context-switch.sh`, `resource-utilization.sh` and `scalability.sh` store their results in the `measurement_results` directory. This folder contains the raw measurements as well as the produced outputs, i.e., table ans figures that are shown in the paper. Each script has a minimal explanation of what it will do and which tables or figures from the paper it will generate.

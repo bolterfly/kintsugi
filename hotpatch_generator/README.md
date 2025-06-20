@@ -1,5 +1,4 @@
 # Hotpatch Generator for Kintsugi
----
 
 This part of the repository contains the hotpatch generator that we used to obtain the bytes for a hotaptch that is compiled together with Kintsugi.
 The idea of this generator is as follows:

@@ -1,5 +1,4 @@
 # Kintsugi Experiments: Security Tests (C6)
----
 
 In this series of experiments, we demonstrate Kintsugi's ability to prevent tampering attacks, as described in *Section 8* of the paper. Specifically, we show that Kintsugi protects itself from adversaries *before*, *during*, and *after* the hotpatching process. Below, we provide the expected outputs from each experiment.
 
@@ -11,7 +10,6 @@ How to perform experiments:
 
 
 #### Before Patching
----
 
 **Expected Output:**
 ```
@@ -32,7 +30,6 @@ Starting Hotpatch Task
 ```
 
 #### During Patching
----
 
 **Expected Output:**
 ```
@@ -63,7 +60,6 @@ Attack FAILED
 ```
 
 #### After Patching
----
 
 **Expected Output:**
 ```

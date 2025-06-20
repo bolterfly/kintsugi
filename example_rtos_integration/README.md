@@ -1,4 +1,5 @@
 # Integrating Kintsugi into Real-Time Operating Systems
+
 In general, integrating Kintsugi into any RTOS requires adding the `Guard` and `Applicator` to the context switch within the kernel. Additionally, one might need to modify the task structures to allow for efficient differentiation between a regular and the hotpatching task. However, this implementation is up to the developers, but we provide for FreeRTOS and Zephyr examples on how to accomplish this.
 
 While we provide instructions on how to manually setup Kintsugi but also provide example files, for the C-files, that already contain the necessary changes to clearly showcase these changes. We have marked the changes introduced by Kintsugi with `==> Kintsugi Start <==` and `==> Kintsugi End <==`.
@@ -67,6 +68,7 @@ hp_measure_stop();
 hp_measure_output();
 #endif
 ``` 
+
 ---
 
 ### CMake Integration

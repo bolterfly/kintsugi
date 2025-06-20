@@ -1,10 +1,10 @@
 # Kintsugi: Secure Hotpatching for Code-Shadowing Real-Time Embedded Systems
----
+
 This is the artifact for the paper "*Kintsugi: Secure Hotpatching for Code-Shadowing Real-Time Embedded Systems*" which is accepted at the 34th USENIX Security Symposium.
 
 
 ## Artifact Description & Prerequisites
----
+
 All experiments have been conducted on the Nordic *nRF52840-DK* and all scripts (except those in `evaluation_scripts`) are meant to be run inside of a docker container.
 For this, we provide a Dockerfile to build an image that already installs all necessary software prerequisities including the necessary dependencies to run the artifacts and build Kintsugi for FreeRTOS and Zephyr.
 
@@ -19,7 +19,6 @@ To verify that Docker can successfully build every experiment, please run the `v
 Note, that this test does not require the existence of the hardware as this is a pure software test.
 
 ## Experimental Evaluation
----
 
 ### Major Claims
 
@@ -37,6 +36,7 @@ Note, that this test does not require the existence of the hardware as this is a
 
 
 ### Experiments
+
 We provide evaluation scripts in the directory `evaluation_scripts' which are interactive and include descriptions of their working and how to correctly use them. If a script automatically produces outputs (i.e., the performance experiments) they will be stored in the folder `measurement_results` under their corresponding subdirectories. We clearly mark experiments that do *not* automatically produce outputs. Those experiments require access to the UART of the board through, e.g., `screen`, `minicom` or `puTTY` with a baudrate of 115200.
 
 - **(E1) `micro-benchmarks.sh` [ ~ 6 computer-hours ]**: Execute the *Micro-Benchmarking* experiments of the *Manager* to prove (**C1**), measuring how each component inside of the *Manager* takes to execute.
@@ -73,13 +73,13 @@ We provide evaluation scripts in the directory `evaluation_scripts' which are in
 
 
 ## Reusability
----
+
 We provide additional details on how to properly integrate the tool into the `Zephyr` and `FreeRTOS` RTOSes in the [example_rtos_integration](./example_rtos_integration) folder. We provide the necessary files that must be adapted to the respective RTOS and instructions on how to do so manually. In our Docker, we require patches to modify the corresponding Git repositories. Therefore, the git-patches for the RTOSes can potentially be used immediately.
 
 Integrating Kintsugi into an RTOS should be straightforward. To do this, create a task for the *Manager* and modify the context switch to check if the *previous* or *next* task is the *Manager*. Additionally, call the *Guard & Applicator* before restoring the execution context of the next task.
 
 ## Repository Structure
----
+
 ```bash
 .
 ├── evaluation_scripts/             # Bash scripts to perform experiments (all executed from _outside_ the docker)

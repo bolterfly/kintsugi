@@ -1,5 +1,4 @@
 # Kintsugi Experiments: Performance Measurements
----
 
 This directory contains all experiments to measure the performance of Kintsugi, as shown in *Section 6* of the paper. For each experiment, we give a short description for each of the experiments.
 
@@ -11,7 +10,7 @@ How to perform measurements:
 - Results will be stored in `/evaluation_scripts/measurement_results`.
 
 ## Micro-Benchmarks (C1 - E1)
----
+
 - [Source Folder](./micro_benchmarks/)
 
 - Paper References:
@@ -23,7 +22,7 @@ How to perform measurements:
 Experiments to measure the performance overhead introduced by the *Manager* of Kintsugi. This experiment executes the *Manager* and its sub-stages such as *Validation*, *Storing* and *Scheduling* of hotpatches, measuring their execution times and storing those in text files that can then be used to derive the tables from within the paper.
 
 ## Context-Switch (C2 - E2)
----
+
 - [Source Folder](./context_switch/)
 
 - Paper References:
@@ -33,7 +32,7 @@ Experiments to measure the performance overhead introduced by the *Manager* of K
 Experiemnts to measure the overhead introduced by the context switch, split into the *Guard* and *Applicator* for the different possible execution states considering whether the *previous task* was the *Manager* or the *next task* is the *Manager*. Measurements are stored in text files that can be used to derive the tables from within the paper.
 
 ## Hotpatch Scalability (C3 - E3)
----
+
 - [Source Folder](./scalability/)
 
 - Paper References:
@@ -43,7 +42,7 @@ Experiemnts to measure the overhead introduced by the context switch, split into
 Experiments to measure the scalability of Kintsugi when applying multiple consecutive hotpatches to the system for increasing number of hotpatches and hotpatch sizes. Measurement results are stored in text files that can be used to plot the figures from within the paper.
 
 ## Resource Utilization / Memory Overhead (C4 - E4)
----
+
 - [Source Folder](./resource_utilization/)
 
 - Paper References:
