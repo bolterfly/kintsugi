@@ -14,8 +14,21 @@ HOTPATCH_SIZES_RAPIDPATCH_MAIN_BODY = sorted([min(HOTPATCH_SIZES_RAPIDPATCH), in
 HOTPATCH_SIZES_AUTOPATCH = sorted(list({528, 504, 392, 400, 780, 400, 400, 548, 468+476, 516, 380, 476, 560, 944}))
 HOTPATCH_SIZES_AUTOPATCH_MAIN_BODY = sorted([min(HOTPATCH_SIZES_AUTOPATCH), int(np.average(HOTPATCH_SIZES_AUTOPATCH)), max(HOTPATCH_SIZES_AUTOPATCH)])
 
-HOTPATCH_SIZES_KINTSUGI = sorted(list({104, 40, 24, 144, 122, 100, 60, 64, 56, 76}))
+HOTPATCH_SIZES_KINTSUGI = [ 104, 40, 24, 144, 122, 100, 60, 64, 56, 76 ]
 HOTPATCH_SIZES_KINTSUGI_MAIN_BODY = []
+
+HOTPATCH_SIZES_KINTUSIG_CVE_MAPPING = {
+    104 : ("CVE-2020-10021"),
+    40  : ("CVE-2020-10023"),
+    24  : ("CVE-2020-10024"),
+    144 : ("CVE-2020-10062"),
+    122 : ("CVE-2020-10063"),
+    100 : ("CVE-2018-16524"),
+    60  : ("CVE-2018-16603"),
+    64  : ("CVE-2017-2784"),
+    56  : ("CVE-2020-17443"),
+    76  : ("CVE-2020-17445")
+}
 
 FRAMEWORKS = [ "Kintsugi", "RapidPatch", "AutoPatch" ]
 COMPONENTS = [ "Manager", "Validation", "Storing", "Scheduling" ]
@@ -118,12 +131,20 @@ def main():
                 item = all_measurements[component][size]
                 measurement = item["measurement"]
                 cycles = int(np.average(measurement))
-
-                entry.append(f"{cycles} ({cycles_to_microseconds(cycles, BOARD_FREQUENCY):.2f} us)")
+                entry_str = f"{cycles} ({cycles_to_microseconds(cycles, BOARD_FREQUENCY):.2f} us)"
+                
+                if framework == "Kintsugi":
+                    entry_str = f"{HOTPATCH_SIZES_KINTUSIG_CVE_MAPPING[size]} {entry_str}" 
+                entry.append(entry_str)
             table_entries.append(entry)
         
-    measurement_table = tabulate(table_entries, headers=["Framework", "Hotpatch Size"] + components, tablefmt="grid")
+    header = ["Framework", "Hotpatch Size"] + components
 
+    if framework == "Kintsugi":
+        header = ["CVE-ID"] + header
+        
+    measurement_table = tabulate(table_entries, headers=header, tablefmt="grid")
+        
     with open(args.out, "w") as f:
         f.write(measurement_table)
 
