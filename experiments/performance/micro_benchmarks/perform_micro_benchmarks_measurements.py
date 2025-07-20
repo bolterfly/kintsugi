@@ -10,11 +10,11 @@ from datetime import datetime
 
 NUM_ITERATIONS = 100
 
-HOTPATCH_SIZES_RAPIDPATCH = sorted(list({56, 48, 260, 68, 48, 232, 188, 56+68, 52, 48, 48, 156}))
-HOTPATCH_SIZES_RAPIDPATCH_MAIN_BODY = sorted([min(HOTPATCH_SIZES_RAPIDPATCH), int(np.average(HOTPATCH_SIZES_RAPIDPATCH)), max(HOTPATCH_SIZES_RAPIDPATCH)])
+HOTPATCH_SIZES_RAPIDPATCH = sorted(list({56, 48, 260, 68, 48, 232, 188, 56+68, 52, 48, 48, 156, 131}))
+HOTPATCH_SIZES_RAPIDPATCH_MAIN_BODY = sorted([48, 131, 260])
 
 HOTPATCH_SIZES_AUTOPATCH = sorted(list({528, 504, 392, 400, 780, 400, 400, 548, 468+476, 516, 380, 476, 560}))
-HOTPATCH_SIZES_AUTOPATCH_MAIN_BODY = sorted([min(HOTPATCH_SIZES_AUTOPATCH), int(np.average(HOTPATCH_SIZES_AUTOPATCH)), max(HOTPATCH_SIZES_AUTOPATCH)])
+HOTPATCH_SIZES_AUTOPATCH_MAIN_BODY = sorted([380, 548, 944])
 
 HOTPATCH_SIZES_KINTSUGI = sorted(list({104, 40, 24, 144, 122, 100, 60, 64, 56, 76}))
 HOTPATCH_SIZES_KINTSUGI_MAIN_BODY = []
@@ -49,8 +49,8 @@ def get_framework_sizes(framework : str, main_body : bool):
     return []
 
 def run_command(command):
-    result = subprocess.run(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, text=True)
-    return "", result.returncode
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    return result.stdout, result.returncode
 
 def create_directory(directory_path):
     try:
@@ -126,7 +126,7 @@ def main():
                 output, returncode = run_command(command)
 
                 # Check for errors in the command output
-                if returncode != 0 or 'error' in output.lower():
+                if returncode != 0:
                     print(f"Error found: {output}")
                     continue
 
