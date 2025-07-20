@@ -127,14 +127,15 @@ def main():
 
         for size in all_sizes:
             entry = [ framework, str(size) ]
+
+            if framework == "Kintsugi":
+                entry = [ str(HOTPATCH_SIZES_KINTUSIG_CVE_MAPPING[size]) ] + entry
+
             for component in components:
                 item = all_measurements[component][size]
                 measurement = item["measurement"]
                 cycles = int(np.average(measurement))
                 entry_str = f"{cycles} ({cycles_to_microseconds(cycles, BOARD_FREQUENCY):.2f} us)"
-                
-                if framework == "Kintsugi":
-                    entry_str = f"{HOTPATCH_SIZES_KINTUSIG_CVE_MAPPING[size]} {entry_str}" 
                 entry.append(entry_str)
             table_entries.append(entry)
         
