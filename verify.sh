@@ -17,9 +17,6 @@ function print_information() {
 # verify that it is possible to build each experiment
 function verify () {
     docker  run -it \
-                --device=/dev/ttyACM0 \
-                --device=/dev/ttyACM1 \
-                -v /dev/bus/usb/:/dev/bus/usb \
                 -v ${PROJ_DIR}/../measurement_results/:/app/ \
                 --entrypoint bash \
                 ${CONTAINER_NAME} \
