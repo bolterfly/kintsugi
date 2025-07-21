@@ -89,6 +89,8 @@ def main():
 
                 try:
                     ser = serial.Serial('/dev/ttyACM0', baudrate=115200, timeout=500)
+                    ser.reset_input_buffer()
+                    ser.reset_output_buffer()
                 except serial.SerialException as e:
                     print(f"Failed to open serial port: {e}")
                     return

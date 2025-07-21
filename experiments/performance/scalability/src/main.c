@@ -95,7 +95,7 @@ void __ramfunc __attribute__((noinline, used, optimize("O0"), aligned(8), optimi
 
 
 #define HP_SIZE (sizeof(struct hp_header) + HP_MAX_CODE_SIZE)
-volatile uint8_t hotpatch_code[HP_SIZE] = { 0 };
+volatile uint8_t hotpatch_code[HP_SIZE * HP_SLOT_COUNT] = { 0 };
 
 
 #define INF_LOOP    while(1) { vTaskDelay(1); }
@@ -119,7 +119,7 @@ perform_measurement(void* data) {
     }
 
     for (uint32_t i = 0; i < HP_SLOT_COUNT; i++) {
-        hotpatch_header = (struct hp_header*)((uint32_t)(&hotpatch_code));
+        hotpatch_header = (struct hp_header*)((uint32_t)(&hotpatch_code) + i * HP_SIZE);
         hotpatch_header->type = HP_TYPE_REDIRECT;
         hotpatch_header->target_address = (uint32_t)&target_ram_function + (i * sizeof(uint32_t));
         hotpatch_header->code_size = HP_MAX_CODE_SIZE;
@@ -127,12 +127,13 @@ perform_measurement(void* data) {
     }
 
     hp_measure_reset();
+
+
     
     result = 0;
     uint32_t id_list[HP_MEASURE_NUM_HOTPATCHES] = { 0 };
     for (uint32_t i = 0; i < HP_MEASURE_NUM_ITERATIONS; i++) {
 
-        
         identifier = 1;
         
         // erase the identifies
@@ -161,7 +162,7 @@ perform_measurement(void* data) {
 
     for (uint32_t i = 0; i < HP_MEASURE_NUM_ITERATIONS; i++) {
         printf("%d\r\n", hp_measure_list[i]);
-        nrf_delay_ms(5);
+        nrf_delay_ms(10);
     }
 
     printf("done\n");

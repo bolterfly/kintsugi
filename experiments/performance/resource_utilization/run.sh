@@ -1,10 +1,7 @@
 #!/bin/bash
 
 CURR_DIR=$(dirname "$0")
-
-TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-
-PROJ_DIR=/app/resource-utilization-${ TIMESTAMP}
+PROJ_DIR=/app/resource-utilization
 MEAS_DIR=${PROJ_DIR}/measurements
 OUT_DIR=${PROJ_DIR}/output
 

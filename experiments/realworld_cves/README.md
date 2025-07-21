@@ -144,7 +144,24 @@ Result: FFFFFF76
 
 ## FreeRTOS
 ---
+#### CVE-2017-2784
+- Details: [Link](https://nvd.nist.gov/vuln/detail/CVE-2017-2784)
+- Hotpatch: `hotpatches/freertos/cve_2020_17445.c` ([Source](../../hotpatches/freertos/cve_2017_2784.c))
 
+**Expected Output:**
+```
+CVE-2017-2784
+Task Main: 1
+Task Manager: 1
+Starting Kintsugi Hotpatch Manager Task
+Import Failed -> Other Error: FFFFB380
+Import Failed -> Other Error: FFFFB380
+Import Failed -> Hotpatch Succeeded!
+Import Failed -> Hotpatch Succeeded!
+Import Failed -> Hotpatch Succeeded!
+Import Failed -> Hotpatch Succeeded!
+Import Failed -> Hotpatch Succeeded!
+```
 
 #### CVE-2018-16524
 - Details: [Link](https://nvd.nist.gov/vuln/detail/CVE-2018-16524)
@@ -237,3 +254,4 @@ Destopt Result: 2
 Destopt Result: 2
 Destopt Result: 2
 ```
+
