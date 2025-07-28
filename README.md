@@ -5,12 +5,16 @@ This is the artifact for the paper "*Kintsugi: Secure Hotpatching for Code-Shado
 
 ## Artifact Description & Prerequisites
 
-All experiments have been conducted on the Nordic *nRF52840-DK* and all scripts (except those in `evaluation_scripts`) are meant to be run inside of a docker container.
+All experiments have been conducted on the Nordic *nRF52840-DK* ([link](https://www.nordicsemi.com/Products/Development-hardware/nRF52840-DK)) and all scripts (except those in `evaluation_scripts`) are meant to be run inside of a docker container.
 For this, we provide a Dockerfile to build an image that already installs all necessary software prerequisities including the necessary dependencies to run the artifacts and build Kintsugi for FreeRTOS and Zephyr.
 
 
 ### Software Requirements
 We recommend using a Linux distribution, preferably Ubuntu-based, as all experiments have been successfully tested on this distribution. We have also verified that the experiments work on a virtual machine running Ubuntu 22.04 LTS. Additionally, it is necessary to have bash installed (which comes standard with Linux) and Docker, which will handle the installation of all other prerequisites.
+
+
+#### Setting up the nRF52840-DK
+To set up the nRF52840-DK board, it is advised to have the [nRF Command Line Tools](https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download) together with the [JLinkGDBServer](https://www.segger.com/products/debug-probes/j-link/tools/j-link-gdb-server/about-j-link-gdb-server/) to be able to debug the board outside of the docker image.
 
 
 ### Basic Test
