@@ -40,28 +40,28 @@ Note, that this test does not require the existence of the hardware as this is a
 
 
 ### Experiments
-
 We provide evaluation scripts in the directory `evaluation_scripts` which are interactive and include descriptions of their working and how to correctly use them. If a script automatically produces outputs (i.e., the performance experiments) they will be stored in the folder `measurement_results` under their corresponding subdirectories. We clearly mark experiments that do *not* automatically produce outputs. Those experiments require access to the UART of the board through, e.g., `screen`, `minicom` or `puTTY` with a baudrate of 115200.
+
 
 - **(E1) `micro-benchmarks.sh` [ ~ 6 computer-hours ]**: Execute the *Micro-Benchmarking* experiments of the *Manager* to prove (**C1**), measuring how each component inside of the *Manager* takes to execute.
     - **Automatic Output**: *Yes.*
     - **Execution**: The measurement does not require user interaction.
-    - **Results**: Upon execution, the user will be asked to select the hotpatch sizes to measure. They can choose between *RapidPatch & AutoPatch* (Section 6.1) or *Kintsugi* (Section 6.4). Measuring a single configuration takes approximately 100 seconds, hence why the script will stay at "*Reading UART output*" for a while. All results will be stored in `micro-benchmarks/manager` with raw measurements being stored in `measurements` and the resulting tables in `output`. The measurements in the table should be as close as possible to those claimed in (**C1**).
+    - **Results**: Upon execution, the user will be asked to select the hotpatch sizes to measure. They can choose between *RapidPatch & AutoPatch* (Section 6.1) or *Kintsugi* (Section 6.4). Measuring a single configuration takes approximately 100 seconds, hence why the script will stay at "*Reading UART output*" for a while. All results will be stored in `micro-benchmarks/manager` with raw measurements being stored in `measurements` and the resulting tables in `output`. The measurements in the table should be as close as possible to those claimed in (**C1**). See [experiments/performance/README.md](./experiments/performance/README.md) for more details on the expected results.
 
 - **(E2): `context-switch.sh` [ ~ 2 computer-minutes ]**: Execute the *Micro-Benchmarking* experiments of the *Guard & Applicator* focusing on the *Context-Switch* of the RTOS to prove (**C2**), demonstrating how much time Kintsugi adds to the context-switch of the RTOS.
     - **Automatic Output**: *Yes.*
     - **Execution**: The measurement does not require user interaction.
-    - **Results**: All results will be stored in `micro-benchmarks/context-switch` with raw measurements being stored in `measurements` and the resulting tables in `output`. The measurements in the table should be as close as possible to those claimed in (**C2**).
+    - **Results**: All results will be stored in `micro-benchmarks/context-switch` with raw measurements being stored in `measurements` and the resulting tables in `output`. The measurements in the table should be as close as possible to those claimed in (**C2**). See [experiments/performance/README.md](./experiments/performance/README.md) for more details on the expected results.
 
 - **(E3): `scalability.sh` [ ~ 4 computer-hours ]**: Execute the *Hotpatching Scalability* experiments to prove (**C3**), measuring Kintsugi's performance when applying multiple consecutive hotpatches, demonstrating that it grows linearly in the number of hotpatches.
     - **Automatic Output**: *Yes.*
     - **Execution**: The measurement does not require user interaction.
-    - **Results**: All results will be stored in `scalability` with raw measurements being stored in `measurements` and the resulting plot will be stored in `output`. The plot should show linear growth in the dimension of number of hotpatches and be as close as possible to the results claimed in (**C3**).
+    - **Results**: All results will be stored in `scalability` with raw measurements being stored in `measurements` and the resulting plot will be stored in `output`. The plot should show linear growth in the dimension of number of hotpatches and be as close as possible to the results claimed in (**C3**). See [experiments/performance/README.md](./experiments/performance/README.md) for more details on the expected results.
 
 - **(E4): `resource-utilization.sh` [ ~ 3 computer-hours ]**: Execute the *Resource Utilization* / *Memory Overhead* experiments to prove (**C4**), measuring the memory overhead introduced by Kintsugi under different parameter configurations of hotpatch counts and sizes.
     - **Automatic Output**: *Yes.*
     - **Execution**: The measurement does not require user interaction.
-    - **Results**: All results will be stored in `resource-utilization` with raw measurements being stored in `measurements` and the resulting plot will be stored in `output`. The plot should show an increase in memory overhead in both dimensions and be as close as possible to the results claimed in (**C4**).
+    - **Results**: All results will be stored in `resource-utilization` with raw measurements being stored in `measurements` and the resulting plot will be stored in `output`. The plot should show an increase in memory overhead in both dimensions and be as close as possible to the results claimed in (**C4**). See [experiments/performance/README.md](./experiments/performance/README.md) for more details on the expected results.
 
 - **(E5): `realworld-cves.sh` [ ~ 30 minutes total ]**: Perform the *Real-World Hotpatching* experiments to prove (**C5**), demonstrating that Kintsugi is capable in hotpatching real-world CVEs.
     - **Automatic Output**: *No.*
@@ -77,13 +77,11 @@ We provide evaluation scripts in the directory `evaluation_scripts` which are in
 
 
 ## Reusability
-
 We provide additional details on how to properly integrate the tool into the `Zephyr` and `FreeRTOS` RTOSes in the [example_rtos_integration](./example_rtos_integration) folder. We provide the necessary files that must be adapted to the respective RTOS and instructions on how to do so manually. In our Docker, we require patches to modify the corresponding Git repositories. Therefore, the git-patches for the RTOSes can potentially be used immediately.
 
 Integrating Kintsugi into an RTOS should be straightforward. To do this, create a task for the *Manager* and modify the context switch to check if the *previous* or *next* task is the *Manager*. Additionally, call the *Guard & Applicator* before restoring the execution context of the next task.
 
 ## Repository Structure
-
 ```bash
 .
 ├── evaluation_scripts/             # Bash scripts to perform experiments (all executed from _outside_ the docker)
